@@ -2,9 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Platformer.Gameplay;
+using UnityEngine.UI;
+using TMPro;
 using static Platformer.Core.Simulation;
 using Platformer.Model;
 using Platformer.Core;
+using UnityEngine.SceneManagement;
 
 namespace Platformer.Mechanics
 {
@@ -42,6 +45,20 @@ namespace Platformer.Mechanics
 
         public Bounds Bounds => collider2d.bounds;
 
+        //NEW: coin,heart,NPC
+        public TMP_Text coinText;         // UI Text to display coin count
+        public TMP_Text heartText;        // UI Text to display hearts
+        public GameObject dialogueBox; // UI for NPC dialogue
+        public Text dialogueText;
+
+        //variables
+        private int coins = 0;        // Coin count
+        private int hearts = 3;       // Player hearts
+        private bool nearNPC = false; // To check if near an NPC
+        private string npcDialogue = ""; // NPC dialogue text
+        private Rigidbody2D rb;
+
+
         void Awake()
         {
             // health = GetComponent<Health>();
@@ -68,6 +85,14 @@ namespace Platformer.Mechanics
             {
                 move.x = 0;
             }
+
+            // NEW: NPC Interaction
+            if (nearNPC && Input.GetKeyDown(KeyCode.F))
+            {
+                dialogueBox.SetActive(!dialogueBox.activeSelf);
+                dialogueText.text = npcDialogue;
+            }
+
             UpdateJumpState();
             base.Update();
         }
@@ -127,6 +152,59 @@ namespace Platformer.Mechanics
             // animator.SetFloat("velocityX", Mathf.Abs(velocity.x) / maxSpeed);
 
             targetVelocity = move * maxSpeed;
+        }
+
+        //NEW:Coins and obstacles
+        // For triggers like coins and NPCs
+        private void OnTriggerEnter2D(Collider2D collision)
+        {
+            // Collect Coins
+            if (collision.gameObject.CompareTag("Coin"))
+            {
+                coins++;
+                UpdateUI();
+                Destroy(collision.gameObject);
+            }
+
+            // Detect NPC
+            if (collision.gameObject.CompareTag("NPC"))
+            {
+                nearNPC = true;
+                //npcDialogue = collision.gameObject.GetComponent<NPC>().dialogue;
+            }
+
+            if (collision.gameObject.CompareTag("Obstacle"))
+            {
+                Debug.Log("Player hit an obstacle!"); // Debug message for trigger detection
+                hearts--;
+                UpdateUI();
+
+                if (hearts <= 0)
+                {
+                    RestartGame();
+                }
+            }
+        }
+
+        private void OnTriggerExit2D(Collider2D collision)
+        {
+            // Leave NPC area
+            if (collision.gameObject.CompareTag("NPC"))
+            {
+                nearNPC = false;
+                dialogueBox.SetActive(false);
+            }
+        }
+
+        void UpdateUI()
+        {
+            coinText.text = "Coins: " + coins;
+            heartText.text = "Hearts: " + hearts;
+        }
+
+        void RestartGame()
+        {
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
         }
 
         public enum JumpState
