@@ -178,15 +178,38 @@ namespace Platformer.Mechanics
 
             if (collision.gameObject.CompareTag("Obstacle"))
             {
-                Debug.Log("Player hit an obstacle!"); 
+                Debug.Log("Player hit an obstacle!");
                 hearts--;
                 UpdateUI();
 
-                if (hearts <= 0)
+                if (hearts > 0)
                 {
-                    RestartGame();
+                    Respawn(false); // Respawn at the most recent checkpoint
+                }
+                else
+                {
+                    Debug.Log("Player ran out of hearts!");
+                    Respawn(true); // Respawn at the first checkpoint
+
+                    // Refill hearts to the initial value (e.g., 3)
+                    hearts = 3;
+                    UpdateUI(); // Update the UI to reflect the refilled hearts
                 }
             }
+
+        }
+
+        //RESPAWN
+        private void Respawn(bool isHeartZero)
+        {
+            Vector2 respawnPoint = CheckpointManager.Instance.GetRespawnPoint(isHeartZero);
+
+            // Add an offset to the Y-axis to position the player above the checkpoint
+            float yOffset = 2.0f; // Adjust this value based on your game's scale
+            Vector2 adjustedRespawnPoint = new Vector2(respawnPoint.x, respawnPoint.y + yOffset);
+
+            transform.position = adjustedRespawnPoint; // Move player to the adjusted respawn point
+            Debug.Log("Player respawned at: " + adjustedRespawnPoint);
         }
 
         private void OnTriggerExit2D(Collider2D collision)
