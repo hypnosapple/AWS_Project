@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Coin
   - Obstacle
+  - NPC
   layers:
   - Default
   - TransparentFX

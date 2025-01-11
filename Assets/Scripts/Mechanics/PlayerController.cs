@@ -170,12 +170,15 @@ namespace Platformer.Mechanics
             if (collision.gameObject.CompareTag("NPC"))
             {
                 nearNPC = true;
-                //npcDialogue = collision.gameObject.GetComponent<NPC>().dialogue;
+
+                //show npc dialogue
+                NPC npc = collision.gameObject.GetComponent<NPC>();
+                npc.ShowDialogue();
             }
 
             if (collision.gameObject.CompareTag("Obstacle"))
             {
-                Debug.Log("Player hit an obstacle!"); // Debug message for trigger detection
+                Debug.Log("Player hit an obstacle!"); 
                 hearts--;
                 UpdateUI();
 
@@ -188,11 +191,13 @@ namespace Platformer.Mechanics
 
         private void OnTriggerExit2D(Collider2D collision)
         {
-            // Leave NPC area
             if (collision.gameObject.CompareTag("NPC"))
             {
                 nearNPC = false;
-                dialogueBox.SetActive(false);
+
+                // Hide NPC dialogue
+                NPC npc = collision.gameObject.GetComponent<NPC>();
+                npc.HideDialogue();
             }
         }
 
