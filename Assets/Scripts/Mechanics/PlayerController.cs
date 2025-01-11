@@ -46,16 +46,16 @@ namespace Platformer.Mechanics
         public Bounds Bounds => collider2d.bounds;
 
         //NEW: coin,heart,NPC
-        public TMP_Text coinText;         // UI Text to display coin count
-        public TMP_Text heartText;        // UI Text to display hearts
-        public GameObject dialogueBox; // UI for NPC dialogue
+        public TMP_Text coinText;         
+        public TMP_Text heartText;       
+        public GameObject dialogueBox; 
         public Text dialogueText;
 
         //variables
-        private int coins = 0;        // Coin count
-        private int hearts = 3;       // Player hearts
-        private bool nearNPC = false; // To check if near an NPC
-        private string npcDialogue = ""; // NPC dialogue text
+        private int coins = 0;        
+        private int hearts = 3;       
+        private bool nearNPC = false; 
+        private string npcDialogue = "";
         private Rigidbody2D rb;
 
 
