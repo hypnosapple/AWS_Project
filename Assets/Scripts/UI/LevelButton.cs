@@ -6,31 +6,68 @@ using UnityEngine.EventSystems;
 public class LevelButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 {
     public string levelName; 
-    public Image iconImage; 
-    public Sprite lockedIcon; 
-    public Sprite unlockedIcon; 
-    public bool isUnlocked = false; 
-    public float hoverScale = 1.1f; 
 
-    private Vector3 originalScale; // To reset scale after hover
+    //icon Image
+    public Image iconImage; 
+
+    //key Image
+    public Image keyImage;
+
+    //number icon
+    public Sprite lockedIcon; 
+    public Sprite unlockedIcon;
+
+    //keyicon
+    public Sprite lockedKey;
+    public Sprite unlockedKey;
+
+    public int levelIndex; // Unique index for this level
+
+    //check if level is unlocked
+    public bool isUnlocked = false;
+
+    public float hoverScale = 1.1f; 
+    private Vector3 originalScale; 
+    private static GameObject parentToPersist;
 
     void Start()
     {
-        //DontDestroyOnLoad(this.gameObject);
+        
+        AssignParentToDontDestroyOnLoad();
 
-        // Save the original scale for resetting
+        
         originalScale = transform.localScale;
+
+        // Load the unlock state for this level
+        isUnlocked = PlayerPrefs.GetInt("Level" + levelIndex, 0) == 1;
 
         // Update the button icon based on the locked/unlocked state
         UpdateIcon();
     }
 
-    //click the level button
+    private void AssignParentToDontDestroyOnLoad()
+    {
+        // Find the parent GameObject
+        GameObject parent = transform.parent.gameObject;
+
+        // If it's not already set to persist, assign it
+        if (parentToPersist == null)
+        {
+            parentToPersist = parent;
+            DontDestroyOnLoad(parentToPersist); // Prevent the parent and all children from being destroyed
+        }
+        else if (parentToPersist != parent)
+        {
+            // Prevent duplicate parents from persisting
+            Debug.LogWarning("Multiple parent objects detected. Ensure only one parent is used for Level Buttons.");
+        }
+    }
+
+    // Click the level button
     public void OnClick()
     {
         if (isUnlocked)
         {
-            
             SceneManager.LoadScene(levelName);
         }
         else
@@ -49,6 +86,18 @@ public class LevelButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
         {
             iconImage.sprite = lockedIcon;
         }
+    }
+
+    public void UnlockLevel()
+    {
+        isUnlocked = true;
+
+        // Save the unlock state persistently
+        PlayerPrefs.SetInt("Level" + levelIndex, 1);
+        PlayerPrefs.Save();
+
+        // Update the button UI
+        UpdateIcon();
     }
 
     public void OnPointerEnter(PointerEventData eventData)
