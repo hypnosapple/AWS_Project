@@ -18,7 +18,7 @@ public class MovingTile : MonoBehaviour
         // Move the tile toward the target point
         transform.position = Vector2.MoveTowards(transform.position, target.position, speed * Time.deltaTime);
 
-        // Switch target when reaching the current one
+        // Switch target 
         if (Vector2.Distance(transform.position, target.position) < 0.1f)
         {
             target = target == pointA ? pointB : pointA;
