@@ -176,6 +176,16 @@ namespace Platformer.Mechanics
                 npc.ShowDialogue();
             }
 
+            // DeadZone
+            if (collision.gameObject.CompareTag("DeadZone"))
+            {
+                Debug.Log("Player entered the DeadZone!");
+                hearts = 0;
+                Respawn(true); 
+                hearts = 3; 
+                UpdateUI(); 
+            }
+
             if (collision.gameObject.CompareTag("Obstacle"))
             {
                 Debug.Log("Player hit an obstacle!");
