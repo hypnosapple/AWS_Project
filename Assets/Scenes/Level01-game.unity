@@ -8732,7 +8732,7 @@ GameObject:
   - component: {fileID: 2143824539}
   - component: {fileID: 2143824538}
   m_Layer: 5
-  m_Name: Canvas.Turtorial
+  m_Name: Canvas.Tutorial
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
