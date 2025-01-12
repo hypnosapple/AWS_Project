@@ -10,13 +10,13 @@ public class LevelButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
     public Sprite lockedIcon; 
     public Sprite unlockedIcon; 
     public bool isUnlocked = false; 
-    public float hoverScale = 1.2f; 
+    public float hoverScale = 1.1f; 
 
     private Vector3 originalScale; // To reset scale after hover
 
     void Start()
     {
-        DontDestroyOnLoad(this.gameObject);
+        //DontDestroyOnLoad(this.gameObject);
 
         // Save the original scale for resetting
         originalScale = transform.localScale;
@@ -25,6 +25,7 @@ public class LevelButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
         UpdateIcon();
     }
 
+    //click the level button
     public void OnClick()
     {
         if (isUnlocked)
