@@ -5,76 +5,60 @@ using UnityEngine.EventSystems;
 
 public class LevelButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 {
-    public string levelName; 
+    public string levelName;
 
-    //icon Image
-    public Image iconImage; 
+    // Icon Image
+    public Image iconImage;
 
-    //key Image
+    // Key Image
     public Image keyImage;
 
-    //number icon
-    public Sprite lockedIcon; 
+    // Sprites for locked and unlocked states
+    public Sprite lockedIcon;
     public Sprite unlockedIcon;
 
-    //keyicon
+    //KEY
     public Sprite lockedKey;
     public Sprite unlockedKey;
 
     public int levelIndex; // Unique index for this level
 
-    //check if level is unlocked
+    // Check if the level is unlocked
     public bool isUnlocked = false;
 
     public float hoverScale = 1.1f; 
     private Vector3 originalScale; 
-    private static GameObject parentToPersist;
+
+    [SerializeField]
+    private UnityEngine.UI.Button buttonComponent; // Button component
 
     void Start()
     {
-        
-        AssignParentToDontDestroyOnLoad();
-
-        
         originalScale = transform.localScale;
 
-        // Load the unlock state for this level
+        // Assign the Button component dynamically if not assigned in the Inspector
+        if (buttonComponent == null)
+        {
+            buttonComponent = GetComponent<UnityEngine.UI.Button>();
+            if (buttonComponent == null)
+            {
+                Debug.LogError("Button component is missing from the GameObject!");
+                return;
+            }
+        }
+
+        // Load the unlock state
         isUnlocked = PlayerPrefs.GetInt("Level" + levelIndex, 0) == 1;
 
-        // Update the button icon based on the locked/unlocked state
+        // Update the button UI
         UpdateIcon();
     }
 
-    private void AssignParentToDontDestroyOnLoad()
-    {
-        // Find the parent GameObject
-        GameObject parent = transform.parent.gameObject;
-
-        // If it's not already set to persist, assign it
-        if (parentToPersist == null)
-        {
-            parentToPersist = parent;
-            DontDestroyOnLoad(parentToPersist); // Prevent the parent and all children from being destroyed
-        }
-        else if (parentToPersist != parent)
-        {
-            // Prevent duplicate parents from persisting
-            Debug.LogWarning("Multiple parent objects detected. Ensure only one parent is used for Level Buttons.");
-        }
-    }
-
-    // Click the level button
     public void OnClick()
     {
         if (isUnlocked)
         {
-            /*// Play the default BGM when entering the level
-            if (BGMmanager.instance != null && BGMmanager.instance.defaultBGM != null)
-            {
-                BGMmanager.instance.PlayBGM(BGMmanager.instance.defaultBGM);
-            }*/
-
-            // Load the scene
+            MenuBGM.instance?.StopBGM();
             SceneManager.LoadScene(levelName);
         }
         else
@@ -82,39 +66,39 @@ public class LevelButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
             Debug.Log("Level is locked!");
         }
     }
+
     public void UpdateIcon()
     {
+        if (buttonComponent == null)
+        {
+            Debug.LogError("Button component not found, cannot update icon!");
+            return;
+        }
+
+        buttonComponent.interactable = isUnlocked; // Enable or disable button interaction
+
         if (isUnlocked)
         {
             iconImage.sprite = unlockedIcon;
+            
         }
         else
         {
             iconImage.sprite = lockedIcon;
+            
         }
-    }
-
-    public void UnlockLevel()
-    {
-        isUnlocked = true;
-
-        // Save the unlock state persistently
-        PlayerPrefs.SetInt("Level" + levelIndex, 1);
-        PlayerPrefs.Save();
-
-        // Update the button UI
-        UpdateIcon();
     }
 
     public void OnPointerEnter(PointerEventData eventData)
     {
-        // Enlarge the button when hovering
-        transform.localScale = originalScale * hoverScale;
+        if (isUnlocked)
+        {
+            transform.localScale = originalScale * hoverScale;
+        }
     }
 
     public void OnPointerExit(PointerEventData eventData)
     {
-        // Reset the button scale
         transform.localScale = originalScale;
     }
 }

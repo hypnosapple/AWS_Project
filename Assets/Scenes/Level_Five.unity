@@ -505,6 +505,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   dialogues:
   - Curiosity is the fuel of invention. What is it you seek, little dreamer?
+  audioClips: []
   textDisplay: {fileID: 453654873}
 --- !u!61 &63934830
 BoxCollider2D:
@@ -8331,6 +8332,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   dialogues:
   - You remind me of your father. Brave and bold. Keep going
+  audioClips: []
   textDisplay: {fileID: 0}
 --- !u!61 &1353649926
 BoxCollider2D:
@@ -14728,6 +14730,6 @@ SceneRoots:
   - {fileID: 612145728}
   - {fileID: 1875968608}
   - {fileID: 1722675411}
-  - {fileID: 1998888995}
   - {fileID: 748925970}
   - {fileID: 1776913261374120331}
+  - {fileID: 1998888995}
