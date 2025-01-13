@@ -9,6 +9,7 @@ TagManager:
   - NPC
   - Pushable
   - DeadZone
+  - FallingTile
   layers:
   - Default
   - TransparentFX

@@ -163,7 +163,8 @@ namespace Platformer.Mechanics
             {
                 coins++;
                 UpdateUI();
-                Destroy(collision.gameObject);
+                // Instead of destroying an object, it is deactive, so that it can be reactivated when the character regenerates
+                collision.gameObject.SetActive(false);
             }
 
             // Detect NPC
@@ -212,6 +213,7 @@ namespace Platformer.Mechanics
         //RESPAWN
         private void Respawn(bool isHeartZero)
         {
+            Simulation.Schedule<PlayerRespawn>(0.1f);
             Vector2 respawnPoint = CheckpointManager.Instance.GetRespawnPoint(isHeartZero);
 
             // Add an offset to the Y-axis to position the player above the checkpoint

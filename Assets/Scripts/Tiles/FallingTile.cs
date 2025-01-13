@@ -1,6 +1,7 @@
+using CheckPoints;
 using UnityEngine;
 
-public class FallingTile : MonoBehaviour
+public class FallingTile : MonoBehaviour, IRespawnable
 {
     private Rigidbody2D rb;
     private bool isActivated = false; 
@@ -25,7 +26,24 @@ public class FallingTile : MonoBehaviour
     private void ActivatePhysics()
     {
         Debug.Log("Tile is falling: " + gameObject.name);
-        rb.constraints = RigidbodyConstraints2D.None; 
-        Destroy(gameObject, 2.0f); 
+        rb.constraints = RigidbodyConstraints2D.None;
+        Invoke("SetInactive", 2.0f);
+        // Destroy(gameObject, 2.0f);
+    }
+
+    private void SetInactive()
+    {
+        // If the value of isActivated is false, the respawn logic is reached. Therefore, this function is not executed
+        if (isActivated)
+        {
+            gameObject.SetActive(false); 
+        }
+    }
+
+    public void ResetState()
+    {
+        isActivated = false;
+        rb = GetComponent<Rigidbody2D>();
+        rb.constraints = RigidbodyConstraints2D.FreezeAll; 
     }
 }
