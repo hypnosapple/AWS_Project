@@ -532,6 +532,9 @@ MonoBehaviour:
   dialogues:
   - Why are you here? This is no place for a child!
   - "You\u2019re determined, I see. But determination without wisdom can be dangerous."
+  audioClips:
+  - {fileID: 8300000, guid: 6db7ba6f6db6c6446a9898a7aac7082e, type: 3}
+  - {fileID: 8300000, guid: 18756f32dac256148bfd94f5a568bc68, type: 3}
   textDisplay: {fileID: 363079881}
 --- !u!61 &19907664
 BoxCollider2D:
@@ -6858,6 +6861,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   dialogues:
   - Persistence is futile. You cannot bypass me.
+  audioClips:
+  - {fileID: 8300000, guid: dded9b56c91007241b0eede9f71aa77f, type: 3}
   textDisplay: {fileID: 203585297}
 --- !u!61 &897132226
 BoxCollider2D:

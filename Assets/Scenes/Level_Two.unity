@@ -4818,6 +4818,9 @@ MonoBehaviour:
   dialogues:
   - Unauthorized personnel detected. Return to the safe zone immediately.
   - Your actions are illogical. Turn back.
+  audioClips:
+  - {fileID: 8300000, guid: 80d528b82cdec854ab6f85d7973e11e9, type: 3}
+  - {fileID: 8300000, guid: baffbe8e148275647a686abaeb44a2cf, type: 3}
   textDisplay: {fileID: 1627874492}
 --- !u!61 &199496590
 BoxCollider2D:
@@ -41581,6 +41584,9 @@ MonoBehaviour:
   - "Your father\u2019s brilliance runs in your veins. The key lies beyond the chasm
     in the very west."
   - If you reach the stars, tell them I said hello.
+  audioClips:
+  - {fileID: 8300000, guid: 97434fbf74a07fe4e81a791bab83a6d0, type: 3}
+  - {fileID: 8300000, guid: 339e21274bc0e68469857d72b109e0e7, type: 3}
   textDisplay: {fileID: 2064665301}
 --- !u!61 &1926990292
 BoxCollider2D:

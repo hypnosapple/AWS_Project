@@ -434,7 +434,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   dialogues:
-  - You remind me of your father. Brave and bold. Keep going
+  - Dreams are fragile but precious. Guard yours with courage.
+  audioClips:
+  - {fileID: 8300000, guid: 64621c827c6cc7e449a392d535427b9c, type: 3}
   textDisplay: {fileID: 1838963735}
 --- !u!61 &80623656
 BoxCollider2D:
@@ -1707,6 +1709,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   dialogues:
   - Curiosity is the fuel of invention. What is it you seek, little dreamer?
+  audioClips:
+  - {fileID: 8300000, guid: 912578db2f1f6a64b91429397c438cda, type: 3}
   textDisplay: {fileID: 210305574}
 --- !u!61 &188588128
 BoxCollider2D:
@@ -5036,7 +5040,7 @@ Transform:
   m_GameObject: {fileID: 745128750}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -173.62, y: -7.44, z: 0}
+  m_LocalPosition: {x: -30.3, y: 8.7, z: 0}
   m_LocalScale: {x: 1, y: 2.5, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:

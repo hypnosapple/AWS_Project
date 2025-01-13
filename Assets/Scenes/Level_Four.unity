@@ -1205,7 +1205,7 @@ GameObject:
   - component: {fileID: 268817767}
   - component: {fileID: 268817766}
   m_Layer: 0
-  m_Name: TheJanitorNPC
+  m_Name: TheFatherNPC
   m_TagString: NPC
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1240,6 +1240,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   dialogues:
   - "You\u2019ve proven yourself, my little explorer. Go reach for the stars."
+  audioClips:
+  - {fileID: 8300000, guid: 6f089bcbb3984bd439e330b2482d61e6, type: 3}
   textDisplay: {fileID: 1265825813}
 --- !u!61 &268817767
 BoxCollider2D:
@@ -7570,6 +7572,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   dialogues:
   - You remind me of your father. Brave and bold. Keep going!
+  audioClips:
+  - {fileID: 8300000, guid: 89ac04a9d0809a54499e818d27182094, type: 3}
   textDisplay: {fileID: 285142270}
 --- !u!61 &1282082074
 BoxCollider2D:

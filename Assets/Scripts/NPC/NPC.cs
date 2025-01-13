@@ -4,9 +4,11 @@ using TMPro;
 public class NPC : MonoBehaviour
 {
     [TextArea] public string[] dialogues; // Array of dialogue lines
+    public AudioClip[] audioClips; // Array of audio clips
     private int currentLine = 0;
 
     public TMP_Text textDisplay; // Reference to the TextMeshPro component
+    private AudioSource audioSource;
 
     void Start()
     {
@@ -15,12 +17,26 @@ public class NPC : MonoBehaviour
         {
             textDisplay.gameObject.SetActive(false);
         }
+
+        // Get or add an AudioSource component
+        audioSource = GetComponent<AudioSource>();
+        if (audioSource == null)
+        {
+            audioSource = gameObject.AddComponent<AudioSource>();
+        }
     }
 
     public string GetNextDialogue()
     {
         if (dialogues.Length == 0) return "";
         string line = dialogues[currentLine];
+
+        if (audioClips != null && currentLine < audioClips.Length && audioClips[currentLine] != null)
+        {
+            audioSource.clip = audioClips[currentLine];
+            audioSource.Play();
+        }
+
         currentLine = (currentLine + 1) % dialogues.Length; // Loop through dialogues
         return line;
     }
@@ -39,6 +55,11 @@ public class NPC : MonoBehaviour
         if (textDisplay != null)
         {
             textDisplay.gameObject.SetActive(false); // Hide the text
+        }
+
+        if (audioSource != null && audioSource.isPlaying)
+        {
+            audioSource.Stop();
         }
     }
 }
