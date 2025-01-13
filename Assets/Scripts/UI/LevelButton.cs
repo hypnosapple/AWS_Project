@@ -68,6 +68,13 @@ public class LevelButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
     {
         if (isUnlocked)
         {
+            /*// Play the default BGM when entering the level
+            if (BGMmanager.instance != null && BGMmanager.instance.defaultBGM != null)
+            {
+                BGMmanager.instance.PlayBGM(BGMmanager.instance.defaultBGM);
+            }*/
+
+            // Load the scene
             SceneManager.LoadScene(levelName);
         }
         else
@@ -75,7 +82,6 @@ public class LevelButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
             Debug.Log("Level is locked!");
         }
     }
-
     public void UpdateIcon()
     {
         if (isUnlocked)
