@@ -44,10 +44,10 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: ba35c9c94730dea47965ff79eb1f5ab8, type: 3}
   m_Resource: {fileID: 8300000, guid: ba35c9c94730dea47965ff79eb1f5ab8, type: 3}
-  m_PlayOnAwake: 1
+  m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
-  Loop: 0
+  Loop: 1
   Mute: 0
   Spatialize: 0
   SpatializePostEffects: 0
@@ -176,7 +176,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bgmSource: {fileID: 1593501679576719608}
-  defaultBGM: {fileID: 0}
 --- !u!1 &8445263426596096022
 GameObject:
   m_ObjectHideFlags: 0

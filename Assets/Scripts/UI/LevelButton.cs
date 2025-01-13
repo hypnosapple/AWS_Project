@@ -17,7 +17,7 @@ public class LevelButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
     public Sprite lockedIcon;
     public Sprite unlockedIcon;
 
-    //KEY
+    // Key sprites
     public Sprite lockedKey;
     public Sprite unlockedKey;
 
@@ -25,9 +25,10 @@ public class LevelButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
 
     // Check if the level is unlocked
     public bool isUnlocked = false;
+    public bool hasKey = false; // Check if the key for this level is collected (for key display purposes)
 
-    public float hoverScale = 1.1f; 
-    private Vector3 originalScale; 
+    public float hoverScale = 1.1f;
+    private Vector3 originalScale;
 
     [SerializeField]
     private UnityEngine.UI.Button buttonComponent; // Button component
@@ -47,23 +48,42 @@ public class LevelButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
             }
         }
 
-        // Load the unlock state
+        // Load the unlock state for this level
         isUnlocked = PlayerPrefs.GetInt("Level" + levelIndex, 0) == 1;
+
+        // Load the key state for this level
+        hasKey = PlayerPrefs.GetInt("Key" + levelIndex, 0) == 1;
 
         // Update the button UI
         UpdateIcon();
+        UpdateKeySprite();
     }
 
     public void OnClick()
     {
-        if (isUnlocked)
+        if (levelIndex == 5) // Logic specific to Level 5
         {
-            MenuBGM.instance?.StopBGM();
-            SceneManager.LoadScene(levelName);
+            if (isUnlocked && AllKeysCollected())
+            {
+                MenuBGM.instance?.StopBGM();
+                SceneManager.LoadScene(levelName);
+            }
+            else
+            {
+                Debug.Log("Level 5 is locked! Ensure all keys are collected and previous levels are completed.");
+            }
         }
-        else
+        else // Logic for other levels
         {
-            Debug.Log("Level is locked!");
+            if (isUnlocked)
+            {
+                MenuBGM.instance?.StopBGM();
+                SceneManager.LoadScene(levelName);
+            }
+            else
+            {
+                Debug.Log("Level is locked! Complete the previous level to unlock.");
+            }
         }
     }
 
@@ -80,12 +100,28 @@ public class LevelButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
         if (isUnlocked)
         {
             iconImage.sprite = unlockedIcon;
-            
         }
         else
         {
             iconImage.sprite = lockedIcon;
-            
+        }
+    }
+
+    public void UpdateKeySprite()
+    {
+        if (keyImage == null)
+        {
+            Debug.LogError("Key Image is not assigned!");
+            return;
+        }
+
+        if (hasKey)
+        {
+            keyImage.sprite = unlockedKey;
+        }
+        else
+        {
+            keyImage.sprite = lockedKey;
         }
     }
 
@@ -100,5 +136,18 @@ public class LevelButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
     public void OnPointerExit(PointerEventData eventData)
     {
         transform.localScale = originalScale;
+    }
+
+    private bool AllKeysCollected()
+    {
+        // Check if keys for all required levels are collected (Level 1 to 4)
+        for (int i = 1; i <= 4; i++) // Levels 1 to 4
+        {
+            if (PlayerPrefs.GetInt("Key" + i, 0) == 0)
+            {
+                return false;
+            }
+        }
+        return true;
     }
 }
