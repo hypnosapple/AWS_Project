@@ -7,10 +7,10 @@ public class LevelButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
 {
     public string levelName;
 
-    // Icon Image
+    // Icon Image (assigned in the Inspector or dynamically found)
     public Image iconImage;
 
-    // Key Image
+    // Key Image (assigned in the Inspector or dynamically found)
     public Image keyImage;
 
     // Sprites for locked and unlocked states
@@ -47,6 +47,13 @@ public class LevelButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
                 return;
             }
         }
+
+        // Dynamically find child components if not assigned
+        if (iconImage == null)
+            iconImage = transform.Find("Icon").GetComponent<Image>();
+
+        if (keyImage == null)
+            keyImage = transform.Find("KeyImage").GetComponent<Image>();
 
         // Load the unlock state for this level
         isUnlocked = PlayerPrefs.GetInt("Level" + levelIndex, 0) == 1;

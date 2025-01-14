@@ -10,10 +10,16 @@ public class EndLevelCollider : MonoBehaviour
     {
         if (collision.CompareTag("Player"))
         {
-            // Unlock the current level
-            PlayerPrefs.SetInt("Level" + currentLevelIndex, 1);
+            // Unlock the next level
+            int nextLevelIndex = currentLevelIndex + 1;
+            PlayerPrefs.SetInt("Level" + nextLevelIndex, 1);
             PlayerPrefs.Save();
-            Debug.Log("Level " + currentLevelIndex + " completed and unlocked!");
+            Debug.Log("Level " + nextLevelIndex + " unlocked!");
+
+            // Mark current level as completed (optional, in case needed for tracking)
+            PlayerPrefs.SetInt("Level" + currentLevelIndex + "_Completed", 1);
+            PlayerPrefs.Save();
+            Debug.Log("Level " + currentLevelIndex + " marked as completed!");
 
             // Check if there is a next level to load
             if (!string.IsNullOrEmpty(nextLevelName))
@@ -23,7 +29,8 @@ public class EndLevelCollider : MonoBehaviour
             }
             else
             {
-                Debug.Log("No next level specified. Level complete!");
+                Debug.Log("No next level specified. Returning to menu.");
+                SceneManager.LoadScene("Menu"); // Replace "Menu" with your menu scene name
             }
         }
     }
