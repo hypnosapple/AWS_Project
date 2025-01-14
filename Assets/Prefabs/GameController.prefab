@@ -63,5 +63,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   respawnTags:
-  - Coin
-  - FallingTile
+  - regenarate
+  - Pushable

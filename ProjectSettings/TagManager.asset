@@ -4,12 +4,11 @@
 TagManager:
   serializedVersion: 3
   tags:
-  - Coin
   - Obstacle
   - NPC
   - Pushable
   - DeadZone
-  - FallingTile
+  - regenarate
   layers:
   - Default
   - TransparentFX

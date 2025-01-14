@@ -40,7 +40,7 @@ namespace Platformer.Mechanics
         bool jump;
         Vector2 move;
         SpriteRenderer spriteRenderer;
-        // internal Animator animator;
+        internal Animator animator;
         readonly PlatformerModel model = Simulation.GetModel<PlatformerModel>();
 
         public Bounds Bounds => collider2d.bounds;
@@ -65,7 +65,7 @@ namespace Platformer.Mechanics
             audioSource = GetComponent<AudioSource>();
             collider2d = GetComponent<Collider2D>();
             spriteRenderer = GetComponent<SpriteRenderer>();
-            // animator = GetComponent<Animator>();
+            animator = GetComponent<Animator>();
         }
 
         protected override void Update()
@@ -154,19 +154,15 @@ namespace Platformer.Mechanics
             targetVelocity = move * maxSpeed;
         }
 
+        public void CoinPlus()
+        {
+            coins++;
+        }
+        
         //NEW:Coins and obstacles
         // For triggers like coins and NPCs
         private void OnTriggerEnter2D(Collider2D collision)
         {
-            // Collect Coins
-            if (collision.gameObject.CompareTag("Coin"))
-            {
-                coins++;
-                UpdateUI();
-                // Instead of destroying an object, it is deactive, so that it can be reactivated when the character regenerates
-                collision.gameObject.SetActive(false);
-            }
-
             // Detect NPC
             if (collision.gameObject.CompareTag("NPC"))
             {
@@ -236,7 +232,7 @@ namespace Platformer.Mechanics
             }
         }
 
-        void UpdateUI()
+        public void UpdateUI()
         {
             coinText.text = "Coins: " + coins;
             heartText.text = "Hearts: " + hearts;
