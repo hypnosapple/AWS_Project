@@ -18,8 +18,8 @@ namespace Platformer.Mechanics
     public class PlayerController : KinematicObject
     {
         public AudioClip jumpAudio;
+        public AudioClip deadAudio;
         public AudioClip respawnAudio;
-        public AudioClip ouchAudio;
 
         /// <summary>
         /// Max horizontal speed of the player.
@@ -158,6 +158,16 @@ namespace Platformer.Mechanics
         {
             coins++;
         }
+
+        public int GetHearts()
+        {
+            return hearts;
+        }
+
+        public void SetHearts(int newHearts)
+        {
+            hearts = newHearts;
+        }
         
         //NEW:Coins and obstacles
         // For triggers like coins and NPCs
@@ -178,9 +188,7 @@ namespace Platformer.Mechanics
             {
                 Debug.Log("Player entered the DeadZone!");
                 hearts = 0;
-                Respawn(true); 
-                hearts = 3; 
-                UpdateUI(); 
+                Simulation.Schedule<PlayerDeath>(0.1f).player = this;
             }
 
             if (collision.gameObject.CompareTag("Obstacle"))
@@ -188,37 +196,37 @@ namespace Platformer.Mechanics
                 Debug.Log("Player hit an obstacle!");
                 hearts--;
                 UpdateUI();
-
-                if (hearts > 0)
-                {
-                    Respawn(false); // Respawn at the most recent checkpoint
-                }
-                else
-                {
-                    Debug.Log("Player ran out of hearts!");
-                    Respawn(true); // Respawn at the first checkpoint
-
-                    // Refill hearts to the initial value (e.g., 3)
-                    hearts = 3;
-                    UpdateUI(); // Update the UI to reflect the refilled hearts
-                }
+                Simulation.Schedule<PlayerDeath>(0.1f).player = this;
+                // if (hearts > 0)
+                // {
+                //     Respawn(false); // Respawn at the most recent checkpoint
+                // }
+                // else
+                // {
+                //     Debug.Log("Player ran out of hearts!");
+                //     Respawn(true); // Respawn at the first checkpoint
+                //
+                //     // Refill hearts to the initial value (e.g., 3)
+                //     hearts = 3;
+                //     UpdateUI(); // Update the UI to reflect the refilled hearts
+                // }
             }
 
         }
 
         //RESPAWN
-        private void Respawn(bool isHeartZero)
-        {
-            Simulation.Schedule<PlayerRespawn>(0.1f);
-            Vector2 respawnPoint = CheckpointManager.Instance.GetRespawnPoint(isHeartZero);
-
-            // Add an offset to the Y-axis to position the player above the checkpoint
-            float yOffset = 2.0f; // Adjust this value based on your game's scale
-            Vector2 adjustedRespawnPoint = new Vector2(respawnPoint.x, respawnPoint.y + yOffset);
-
-            transform.position = adjustedRespawnPoint; // Move player to the adjusted respawn point
-            Debug.Log("Player respawned at: " + adjustedRespawnPoint);
-        }
+        // private void Respawn(bool isHeartZero)
+        // {
+        //     Simulation.Schedule<PlayerRespawn>(0.1f).player = this;
+        //     Vector2 respawnPoint = CheckpointManager.Instance.GetRespawnPoint(isHeartZero);
+        //
+        //     // Add an offset to the Y-axis to position the player above the checkpoint
+        //     float yOffset = 2.0f; // Adjust this value based on your game's scale
+        //     Vector2 adjustedRespawnPoint = new Vector2(respawnPoint.x, respawnPoint.y + yOffset);
+        //
+        //     transform.position = adjustedRespawnPoint; // Move player to the adjusted respawn point
+        //     Debug.Log("Player respawned at: " + adjustedRespawnPoint);
+        // }
 
         private void OnTriggerExit2D(Collider2D collision)
         {
