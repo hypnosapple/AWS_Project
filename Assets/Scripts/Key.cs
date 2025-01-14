@@ -3,7 +3,16 @@ using UnityEngine;
 public class Key : MonoBehaviour
 {
     public int levelIndex; // The level this key is associated with
-    public LevelButton levelButton; // Reference to the corresponding LevelButton
+
+    void Start()
+    {
+        // Check if the key has already been collected
+        if (PlayerPrefs.GetInt("Key" + levelIndex, 0) == 1)
+        {
+            // Key already collected; destroy this object
+            Destroy(gameObject);
+        }
+    }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
@@ -13,11 +22,7 @@ public class Key : MonoBehaviour
             PlayerPrefs.SetInt("Key" + levelIndex, 1);
             PlayerPrefs.Save();
 
-            // Update the LevelButton key sprite
-            if (levelButton != null)
-            {
-                levelButton.UpdateKeySprite();
-            }
+            Debug.Log("Key for Level " + levelIndex + " collected!");
 
             // Destroy the key GameObject
             Destroy(gameObject);

@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.UI;
-using UnityEngine.SceneManagement;
 using UnityEngine.EventSystems;
+using UnityEngine.SceneManagement;
 
 public class LevelButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 {
@@ -121,6 +121,9 @@ public class LevelButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
             Debug.LogError("Key Image is not assigned!");
             return;
         }
+
+        // Check if the key for this level has been collected
+        hasKey = PlayerPrefs.GetInt("Key" + levelIndex, 0) == 1;
 
         if (hasKey)
         {
