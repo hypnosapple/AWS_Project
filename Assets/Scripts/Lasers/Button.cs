@@ -5,52 +5,28 @@ public class Button : MonoBehaviour
     [Header("Laser Group")]
     public GameObject[] lasers; // Array to hold all lasers controlled by this button
 
-    public GameObject FtoInteract;
-
-    private bool playerNearby = false; // Track if the player is near the button
-
-    private void Update()
+    private void OnCollisionEnter2D(Collision2D collision)
     {
-        // Check if the player is nearby and presses the F key
-        if (playerNearby && Input.GetKeyDown(KeyCode.F))
+        // Check if the player lands on the button
+        if (collision.collider.CompareTag("Player"))
         {
-            ToggleLasers(); // Toggle the state of all lasers
+            DeactivateButtonAndLasers(); // Deactivate button and lasers
         }
     }
 
-    private void ToggleLasers()
+    private void DeactivateButtonAndLasers()
     {
-        // Iterate through the laser array and toggle each laser's state
+        // Deactivate the button (make it visually disappear)
+        gameObject.SetActive(false);
+
+        // Iterate through the laser array and deactivate each laser
         foreach (GameObject laser in lasers)
         {
             if (laser != null) // Ensure the laser reference is valid
             {
-                bool isActive = laser.activeSelf;
-                laser.SetActive(!isActive); // Toggle the laser's active state
-                Debug.Log(laser.name + (isActive ? " deactivated." : " activated."));
+                laser.SetActive(false); // Deactivate the laser
+                Debug.Log(laser.name + " deactivated.");
             }
-        }
-    }
-
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-        // Detect if the player enters the button's trigger area
-        if (collision.CompareTag("Player"))
-        {
-            playerNearby = true;
-            FtoInteract.SetActive(true);
-            Debug.Log("Player is near the button.");
-        }
-    }
-
-    private void OnTriggerExit2D(Collider2D collision)
-    {
-        // Detect if the player leaves the button's trigger area
-        if (collision.CompareTag("Player"))
-        {
-            playerNearby = false;
-            FtoInteract.SetActive(false);
-            Debug.Log("Player left the button area.");
         }
     }
 }
