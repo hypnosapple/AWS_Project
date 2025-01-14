@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 3914738190118863901}
   - component: {fileID: 9048517730823250630}
   - component: {fileID: 6332084732708747846}
+  - component: {fileID: 4591736724938382342}
   m_Layer: 0
   m_Name: FallingTile
   m_TagString: regenarate
@@ -144,7 +145,7 @@ Rigidbody2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1464449653469657056}
-  m_BodyType: 1
+  m_BodyType: 0
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
@@ -175,3 +176,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e6e7799f6a1f4d76a4b25a9cdf313ce7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &4591736724938382342
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1464449653469657056}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7161b5bde90050d48bcf0ded1d3db0a7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fallDelay: 1.2
