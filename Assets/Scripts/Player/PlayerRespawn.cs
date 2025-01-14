@@ -36,6 +36,7 @@ namespace Platformer.Gameplay
             
             // enable enput
             player.controlEnabled = true;
+            player.IsDead = false;
             
             // Regenerate the scene objects
             var respawnManager = UnityEngine.Object.FindObjectOfType<RespawnManager>();

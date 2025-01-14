@@ -31,6 +31,7 @@ namespace Platformer.Mechanics
         public float jumpTakeOffSpeed = 7;
 
         public JumpState jumpState = JumpState.Grounded;
+        public bool IsDead = false;
         private bool stopJump;
         /*internal new*/ public Collider2D collider2d;
         /*internal new*/ public AudioSource audioSource;
@@ -129,6 +130,14 @@ namespace Platformer.Mechanics
 
         protected override void ComputeVelocity()
         {
+            if (IsDead)
+            {
+                velocity.x = 0;
+                velocity.y = 0;
+                targetVelocity = Vector2.zero;
+                return;
+            }
+            
             if (jump && IsGrounded)
             {
                 velocity.y = jumpTakeOffSpeed * model.jumpModifier;
@@ -173,19 +182,24 @@ namespace Platformer.Mechanics
         // For triggers like coins and NPCs
         private void OnTriggerEnter2D(Collider2D collision)
         {
+            if (IsDead)
+            {
+                return;
+            }
+            
             // Detect NPC
             if (collision.gameObject.CompareTag("NPC"))
             {
                 nearNPC = true;
-
                 //show npc dialogue
                 NPC npc = collision.gameObject.GetComponent<NPC>();
                 npc.ShowDialogue();
             }
-
+            
             // DeadZone
             if (collision.gameObject.CompareTag("DeadZone"))
             {
+                IsDead = true;
                 Debug.Log("Player entered the DeadZone!");
                 hearts = 0;
                 Simulation.Schedule<PlayerDeath>(0.1f).player = this;
@@ -193,6 +207,7 @@ namespace Platformer.Mechanics
 
             if (collision.gameObject.CompareTag("Obstacle"))
             {
+                IsDead = true;
                 Debug.Log("Player hit an obstacle!");
                 hearts--;
                 UpdateUI();

@@ -17,11 +17,11 @@ namespace Platformer.Gameplay
 
         public override void Execute()
         {
-            if (player.audioSource && player.deadAudio)
-                player.audioSource.PlayOneShot(player.deadAudio);
-            
             // disable enput
             player.controlEnabled = false;
+                
+            if (player.audioSource && player.deadAudio)
+                player.audioSource.PlayOneShot(player.deadAudio);
             
             // TODO: Animation and other special effects ...
             
