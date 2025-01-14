@@ -22,10 +22,14 @@ namespace Platformer.Gameplay
                 
             if (player.audioSource && player.deadAudio)
                 player.audioSource.PlayOneShot(player.deadAudio);
-            
+
             // TODO: Animation and other special effects ...
-            
-            Simulation.Schedule<PlayerRespawn>(2).player = player;
+            player.TriggerDeathAnimation();
+
+
+            Simulation.Schedule<PlayerRespawn>(1.1f).player = player;
         }
     }
+
+
 }

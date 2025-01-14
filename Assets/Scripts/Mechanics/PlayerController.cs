@@ -243,6 +243,41 @@ namespace Platformer.Mechanics
         //     Debug.Log("Player respawned at: " + adjustedRespawnPoint);
         // }
 
+        // New method to trigger the death animation
+        public void TriggerDeathAnimation()
+        {
+            StartCoroutine(PlayDeathAnimation());
+        }
+
+        // Coroutine for the blinking death animation
+        private IEnumerator PlayDeathAnimation()
+        {
+            SpriteRenderer renderer = GetComponent<SpriteRenderer>();
+            if (renderer == null)
+            {
+                Debug.LogError("SpriteRenderer not found on Player!");
+                yield break;
+            }
+
+            Color originalColor = renderer.color;
+            Color deathColor = Color.red;
+
+            int blinkCount = 6; 
+            float blinkDuration = 0.2f; 
+
+            for (int i = 0; i < blinkCount; i++)
+            {
+                renderer.color = deathColor; 
+                yield return new WaitForSeconds(blinkDuration / 2);
+
+                renderer.color = originalColor; // Reset to original
+                yield return new WaitForSeconds(blinkDuration / 2);
+            }
+
+            
+            renderer.color = originalColor;
+        }
+
         private void OnTriggerExit2D(Collider2D collision)
         {
             if (collision.gameObject.CompareTag("NPC"))
