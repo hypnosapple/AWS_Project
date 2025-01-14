@@ -11391,6 +11391,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7056968237527007166, guid: 38f8741b195d76946a900af777d8fd39, type: 3}
+      propertyPath: coinText
+      value: 
+      objectReference: {fileID: 2001048142}
+    - target: {fileID: 7056968237527007166, guid: 38f8741b195d76946a900af777d8fd39, type: 3}
+      propertyPath: heartText
+      value: 
+      objectReference: {fileID: 426345672}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
