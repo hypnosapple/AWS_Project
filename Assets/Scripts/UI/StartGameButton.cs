@@ -6,13 +6,13 @@ public class StartGameButton : MonoBehaviour, IPointerEnterHandler, IPointerExit
 {
     public string LevelScene;
 
-    private Vector3 originalPosition; // Store the original position of the button
-    public float hoverOffset = 10f; // Offset to move the button up on hover
+    private Vector3 originalScale; // Store the original scale of the button
+    public float hoverScale = 1.1f; // Scale multiplier for hover effect
 
     void Start()
     {
-        // Save the original position of the button
-        originalPosition = transform.position;
+        // Save the original scale of the button
+        originalScale = transform.localScale;
     }
 
     public void LoadScene()
@@ -31,13 +31,13 @@ public class StartGameButton : MonoBehaviour, IPointerEnterHandler, IPointerExit
 
     public void OnPointerEnter(PointerEventData eventData)
     {
-        // Move the button up slightly when hovered over
-        transform.position = originalPosition + new Vector3(0, hoverOffset, 0);
+        // Enlarge the button on hover
+        transform.localScale = originalScale * hoverScale;
     }
 
     public void OnPointerExit(PointerEventData eventData)
     {
-        // Reset the button's position when the pointer exits
-        transform.position = originalPosition;
+        // Reset the button scale
+        transform.localScale = originalScale;
     }
 }
