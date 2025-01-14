@@ -1,6 +1,4 @@
-Here's the updated `README.md` with the game controls added:
 
----
 
 # Into The Stars
 
