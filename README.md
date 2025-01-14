@@ -1,12 +1,12 @@
 
 
-# Into The Stars
+# Into The Stars :star2:
 
 **Into The Stars** is a short, narrative-driven platformer game developed using Unity. The game combines diverse mechanics, challenging traps, and innovative movement features, all wrapped in a cohesive story that can be completed in 5-10 minutes. Inspired by games like *Downwell*, *Geometry Dash*, and *N++*, we aimed to deliver a polished experience that balances gameplay and storytelling.
 
 ---
 
-## Features
+## Features :video_game:
 
 - **Unique Gameplay Mechanics**: Includes various traps and movement gimmicks across progressively challenging levels.
 - **Short and Engaging Story**: A complete narrative experience integrated seamlessly into the gameplay.
@@ -15,7 +15,7 @@
 
 ---
 
-## Controls
+## Controls :joystick:
 
 - **Move Left/Right**: Press `A` to move left and `D` to move right.
 - **Jump**: Press `Spacebar` to jump. Hold the spacebar longer to jump higher.
@@ -24,7 +24,7 @@ Mastering these simple controls is key to navigating the game's traps and mechan
 
 ---
 
-## Tools and Technologies
+## Tools and Technologies :hammer_and_wrench:
 
 - **Unity**: The primary engine used for development.
 - **AWS Polly**: Generated NPC voices to enhance the narrative elements.
@@ -33,7 +33,7 @@ Mastering these simple controls is key to navigating the game's traps and mechan
 
 ---
 
-## Development Process
+## Development Process :scroll:
 
 1. **Brainstorming and Planning**: 
    - Gathered inspiration from reference games.
@@ -54,7 +54,7 @@ Mastering these simple controls is key to navigating the game's traps and mechan
 
 ---
 
-## Challenges and Lessons Learned
+## Challenges and Lessons Learned :bulb:
 
 ### Challenges
 - **Communication and Planning**:
@@ -75,7 +75,7 @@ Mastering these simple controls is key to navigating the game's traps and mechan
 
 ---
 
-## Installation and Usage
+## Installation and Usage :rocket:
 
 1. Clone the repository:
    ```bash
@@ -86,7 +86,7 @@ Mastering these simple controls is key to navigating the game's traps and mechan
 
 ---
 
-## Credits
+## Credits :raised_hands:
 
 **Team Members**:
 - [Hongxin Li] [https://github.com/hypnosapple](https://github.com/hypnosapple)
@@ -96,7 +96,7 @@ Mastering these simple controls is key to navigating the game's traps and mechan
 
 ---
 
-## Feedback and Contributions
+## Feedback and Contributions :speech_balloon:
 
 We welcome feedback and contributions! If you encounter any issues or have suggestions for improvement, please open an issue or submit a pull request.
 
