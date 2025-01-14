@@ -3,11 +3,9 @@ using UnityEngine.SceneManagement;
 
 public class BacktoMenu : MonoBehaviour
 {
-    public string MenuScene;
+    public string Menu;
     public void Backtomenu()
     {
-        // Stop the BGM before transitioning to the menu
-        BGMmanager.instance.StopBGM();
-        SceneManager.LoadScene(MenuScene);
+        SceneManager.LoadScene(Menu);
     }
 }
