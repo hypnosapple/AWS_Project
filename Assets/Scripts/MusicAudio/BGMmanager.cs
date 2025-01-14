@@ -38,6 +38,9 @@ public class BGMmanager : MonoBehaviour
         {
             HandleSceneChange(newSceneName);
             currentSceneName = newSceneName;
+        } else if (newSceneName == "Level_Five")
+        {
+            StopBGM();
         }
     }
 
