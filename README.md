@@ -91,7 +91,8 @@ Mastering these simple controls is key to navigating the game's traps and mechan
 **Team Members**:
 - [Hongxin Li] [https://github.com/hypnosapple](https://github.com/hypnosapple)
 - [Xihao Liu] [https://github.com/1ndigoLIU](https://github.com/1ndigoLIU)
-
+- [Daniel He] [https://github.com/Daniel0701](https://github.com/Daniel0701)
+- [Wei Cai] [https://github.com/Doria078cw](https://github.com/Doria078cw)
 
 ---
 
