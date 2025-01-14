@@ -54,12 +54,13 @@ MonoBehaviour:
   minGroundNormalY: 0.65
   gravityModifier: 1
   velocity: {x: 0, y: 0}
-  jumpAudio: {fileID: 8300000, guid: 85a2057e65bb3b549914326521f7e78c, type: 3}
+  jumpAudio: {fileID: 8300000, guid: 422f2a123a37f594fb9af9589ec5b73d, type: 3}
   deadAudio: {fileID: 8300000, guid: 22be7648debbc3d4b973725ca3bb9d8d, type: 3}
   respawnAudio: {fileID: 8300000, guid: 8fc81ea3259f5c84bb60f95da3bba502, type: 3}
   maxSpeed: 7
   jumpTakeOffSpeed: 4.5
   jumpState: 0
+  IsDead: 0
   collider2d: {fileID: 0}
   audioSource: {fileID: 0}
   controlEnabled: 1

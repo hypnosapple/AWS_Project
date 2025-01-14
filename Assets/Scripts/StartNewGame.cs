@@ -7,7 +7,7 @@ public class StartNewGame : MonoBehaviour
 
     public void ResetProgress()
     {
-        // Clear all PlayerPrefs
+        
         PlayerPrefs.DeleteAll();
 
         PlayerPrefs.Save();
