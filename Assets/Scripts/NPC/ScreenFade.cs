@@ -12,6 +12,9 @@ public class ScreenFade : MonoBehaviour
     public string endingMessage = "Thank you for playing!"; // Closing title content
     public float subtitleDuration = 3f;
 
+    public AudioSource bgmAudio; // Reference to the background music AudioSource
+    public float audioFadeDuration = 3f; // Separate audio fade duration
+
     private bool isFading = false;
 
     public void TriggerFade()
@@ -19,6 +22,7 @@ public class ScreenFade : MonoBehaviour
         if (!isFading)
         {
             StartCoroutine(FadeToWhite());
+            StartCoroutine(FadeAudioOut());
         }
     }
 
@@ -44,11 +48,34 @@ public class ScreenFade : MonoBehaviour
 
         yield return new WaitForSeconds(subtitleDuration); // Caption display time (adjustable)
 
-        // TODO: Load the next scene or end the game here
+        // Call BacktoMenu after fade
         Debug.Log("Game Over or Transition Complete.");
         BacktoMenu();
     }
-    
+
+
+    private IEnumerator FadeAudioOut()
+    {
+        if (bgmAudio == null)
+        {
+            Debug.LogWarning("No AudioSource assigned for background music.");
+            yield break;
+        }
+
+        float elapsedTime = 0f;
+        float initialVolume = bgmAudio.volume;
+
+        while (elapsedTime < audioFadeDuration)
+        {
+            elapsedTime += Time.deltaTime;
+            bgmAudio.volume = Mathf.Lerp(initialVolume, 0f, elapsedTime / audioFadeDuration);
+            yield return null;
+        }
+
+        bgmAudio.volume = 0f;
+        bgmAudio.Stop(); // Stop the audio completely after fade
+    }
+
     public void BacktoMenu()
     {
         SceneManager.LoadScene("Menu");
