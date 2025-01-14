@@ -1,16 +1,16 @@
 using UnityEngine;
 using UnityEngine.UI;
-using UnityEngine.EventSystems;
 using UnityEngine.SceneManagement;
+using UnityEngine.EventSystems;
 
 public class LevelButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 {
     public string levelName;
 
-    // Icon Image (assigned in the Inspector or dynamically found)
+    // Icon Image
     public Image iconImage;
 
-    // Key Image (assigned in the Inspector or dynamically found)
+    // Key Image
     public Image keyImage;
 
     // Sprites for locked and unlocked states
@@ -55,8 +55,16 @@ public class LevelButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
         if (keyImage == null)
             keyImage = transform.Find("KeyImage").GetComponent<Image>();
 
-        // Load the unlock state for this level
-        isUnlocked = PlayerPrefs.GetInt("Level" + levelIndex, 0) == 1;
+        // Set Level 1 to always be unlocked
+        if (levelIndex == 0)
+        {
+            isUnlocked = true; // Level 1 is always unlocked
+        }
+        else
+        {
+            // Load the unlock state for other levels
+            isUnlocked = PlayerPrefs.GetInt("Level" + levelIndex, 0) == 1;
+        }
 
         // Load the key state for this level
         hasKey = PlayerPrefs.GetInt("Key" + levelIndex, 0) == 1;
